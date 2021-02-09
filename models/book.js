@@ -3,24 +3,27 @@ const mongoose = require("mongoose");
 const BookSchema = mongoose.Schema({
     title : {
         type : String ,
-        required : [true, "Book title is required"],
-        unique : true,
-        trim : true,
-        maxLength : [100, "Book title cannot be more than 100 characters"]
+        require : [true , "Book title is required"],
+        unique : [true , "Book title must be unique"],
+        maxLength : [30, "Book title must be less than 30 characters"],
+        minLength : [2, "Book title minumum length is 2"]
     },
     author : {
         type : String ,
-        required : [true , "Book Author is required"],
-        trim : true,
+        require : [true , "Book author is required"],
+        maxLength : [30, "Book author must be less than 30 characters"],
+        minLength : [2, "Book author minumum length is 2"]
     },
     year : {
         type : Number ,
-        required : [true , "Book Year is required"],
-        min : [1000, "Year must be at least 1000"],
-        max : [new Date().getFullYear(), "Year cannot be in the future"]
+        require : [true , "Book year is required"],
+        maxLength : [1000, "Book author must be less than 1000 years"],
+        minLength : [new Date().getFullYear(), "Book year must be in the past"]
     },
-    createdAt : {type : Date , default : Date.now}
+    createdAt : {
+        type : Date,
+        default: Date.now
+    }
 })
 
-
-module.exports  = mongoose.model("Book", BookSchema);
+module.exports = mongoose.model("Book", BookSchema);

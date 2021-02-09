@@ -2,17 +2,18 @@ const express = require("express");
 const dotenv = require("dotenv");
 const connectToDB = require("./database/db");
 const bookRoutes = require("./routes/book")
-
 dotenv.config();
 
 const app = express();
 
-const port = process.env.PORT || 3000;
-const mongURI = process.env.MONGO_URI;
-
-connectToDB(mongURI);
-
 app.use(express.json());
+
+const port = process.env.PORT;
+const mongoURI = process.env.MONGO_URI;
+
+connectToDB(mongoURI);
+
+
 app.use("/api/books", bookRoutes)
 
 
